@@ -40,7 +40,7 @@
         }
     </style>
 </head>
-<body class="min-h-screen flex items-center justify-center overflow-hidden relative">
+<body class="min-h-screen overflow-hidden relative">
     <!-- Background Image with Overlay -->
     <div class="absolute inset-0 z-0">
         <img 
@@ -52,7 +52,7 @@
     </div>
 
     <!-- Content Container -->
-    <div class="relative z-10 flex flex-col items-center justify-end pb-12 w-full h-full">
+    <div class="absolute bottom-0 left-0 right-0 z-10 flex flex-col items-center pb-12">
         <!-- Meow Button -->
         <button 
             id="meowBtn"
@@ -61,7 +61,6 @@
             Meow
         </button>
     </div>
-
 
     <!-- Container for floating meow texts -->
     <div id="meowContainer" class="absolute inset-0 pointer-events-none z-20"></div>
