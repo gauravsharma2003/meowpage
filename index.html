@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meow Button</title>
+    <title>Meow Tap</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @keyframes float-away {
@@ -17,26 +17,14 @@
             }
         }
 
-        @keyframes tap-pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(0.95);
-            }
-        }
-
         .meow-text {
             animation: float-away 1.5s ease-out forwards;
             pointer-events: none;
         }
 
-        .tap-animate {
-            animation: tap-pulse 0.3s ease-in-out;
-        }
-
         body {
             background-color: #fce7f3;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -51,31 +39,14 @@
         <div class="absolute inset-0 bg-zinc-600 opacity-20"></div>
     </div>
 
-    <!-- Content Container -->
-    <div class="absolute bottom-0 left-0 right-0 z-10 flex flex-col items-center pb-12">
-        <!-- Meow Button -->
-        <button 
-            id="meowBtn"
-            class="bg-pink-300 hover:bg-pink-400 text-pink-900 font-bold text-2xl px-12 py-6 rounded-full shadow-2xl transition-all duration-200 hover:shadow-pink-500/50 active:scale-95"
-        >
-            Meow
-        </button>
-    </div>
-
     <!-- Container for floating meow texts -->
     <div id="meowContainer" class="absolute inset-0 pointer-events-none z-20"></div>
 
     <script>
-        const meowBtn = document.getElementById('meowBtn');
         const meowContainer = document.getElementById('meowContainer');
+        const body = document.body;
 
-        meowBtn.addEventListener('click', function() {
-            // Add tap animation
-            meowBtn.classList.add('tap-animate');
-            setTimeout(() => {
-                meowBtn.classList.remove('tap-animate');
-            }, 300);
-
+        body.addEventListener('click', function(e) {
             // Play sound (you can add your own sound file)
             const audio = new Audio('meow.mp3');
             audio.play();
@@ -83,14 +54,9 @@
             // Generate random number of meow texts (5-10)
             const numMeows = Math.floor(Math.random() * 6) + 5;
 
-            // Get button position
-            const btnRect = meowBtn.getBoundingClientRect();
-            const btnCenterX = btnRect.left + btnRect.width / 2;
-            const btnCenterY = btnRect.top + btnRect.height / 2;
-
             for (let i = 0; i < numMeows; i++) {
                 setTimeout(() => {
-                    createMeowText(btnCenterX, btnCenterY);
+                    createMeowText(e.clientX, e.clientY);
                 }, i * 50);
             }
         });
